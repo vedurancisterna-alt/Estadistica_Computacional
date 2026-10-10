@@ -13,12 +13,39 @@ La variable objetivo del dataset es **Revenue**, que indica si una sesión termi
 ## Estructura del repositorio
 
 ```text
-Online-Shoppers-Purchasing-Intention/
+Estadistica_Computacional/
 ├── data/
-│   ├── raw/          # Datos originales
+│   ├── raw/          # Datos originales (online_shoppers_intention.csv)
 │   └── processed/    # Datos procesados
-├── notebooks/        # Jupyter Notebooks
-├── docs/             # Informes y documentación
+├── notebooks/
+│   └── 01_exploracion_inicial.ipynb   # Sumativa 1: análisis exploratorio e inferencial
+├── docs/
+│   ├── informe_sumativa1_grupo2.pdf   # Informe entregable de la Sumativa 1
+│   └── informe_sumativa1_grupo2.docx  # Versión editable del informe
 ├── README.md
 ├── requirements.txt
 └── .gitignore
+```
+
+## Evaluaciones
+
+| Evaluación | Notebook | Informe |
+| --- | --- | --- |
+| Sumativa 1: Análisis exploratorio e inferencial | `notebooks/01_exploracion_inicial.ipynb` | `docs/informe_sumativa1_grupo2.pdf` |
+
+## Puesta en marcha
+
+Requisitos: Python 3.10 o superior.
+
+```bash
+python -m venv .venv
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+jupyter notebook
+```
+
+El notebook puede ejecutarse desde la raíz del repositorio o desde `notebooks/`, y usa una semilla fija (`RANDOM_STATE = 42`) para que los resultados sean reproducibles.
+
+## Integrantes (Grupo 2)
+
+Verónica Durán, Raúl Moya, Daniela Rojas, Manuel Sánchez.
