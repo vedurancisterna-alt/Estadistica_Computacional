@@ -17,7 +17,10 @@ Estadistica_Computacional/
 ├── data/
 │   ├── raw/          # Datos originales (online_shoppers_intention.csv)
 │   └── processed/    # Datos procesados
-├── notebooks/
+├── F1/
+│   ├── Formativa_1.ipynb              # Formativa 1: notebook
+│   └── Formativa_1_Grupo_2.pdf        # Formativa 1: informe
+├── F2/
 │   └── 01_exploracion_inicial.ipynb   # Sumativa 1: análisis exploratorio e inferencial
 ├── docs/
 │   ├── informe_sumativa1_grupo2.pdf   # Informe entregable de la Sumativa 1
@@ -31,7 +34,8 @@ Estadistica_Computacional/
 
 | Evaluación | Notebook | Informe |
 | --- | --- | --- |
-| Sumativa 1: Análisis exploratorio e inferencial | `notebooks/01_exploracion_inicial.ipynb` | `docs/informe_sumativa1_grupo2.pdf` |
+| Formativa 1 | `F1/Formativa_1.ipynb` | `F1/Formativa_1_Grupo_2.pdf` |
+| Sumativa 1: Análisis exploratorio e inferencial | `F2/01_exploracion_inicial.ipynb` | `docs/informe_sumativa1_grupo2.pdf` |
 
 ## Puesta en marcha
 
@@ -44,7 +48,7 @@ pip install -r requirements.txt
 jupyter notebook
 ```
 
-El notebook puede ejecutarse desde la raíz del repositorio o desde `notebooks/`, y usa una semilla fija (`RANDOM_STATE = 42`) para que los resultados sean reproducibles.
+Los notebooks pueden ejecutarse desde la raíz del repositorio o desde su propia carpeta (`F1/` o `F2/`), y usan una semilla fija (`RANDOM_STATE = 42`) para que los resultados sean reproducibles.
 
 ## Integrantes (Grupo 2)
 
