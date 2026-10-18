@@ -1,10 +1,11 @@
-﻿tipo,resultado,estimacion,ic95_inf,ic95_sup,validacion,estado,recomendacion_S3
-Parámetro,Media ProductRelated_Duration,1194.7462199688268,1162.4848763352934,1230.9518453071685,Bootstrap percentil y BCa,Validado por remuestreo,Conservar; considerar asimetría y outliers.
-Parámetro,Media PageValues,5.889257862693593,5.580391401632237,6.234119167866709,Bootstrap percentil y BCa,Validado por remuestreo,Conservar; considerar asimetría y outliers.
-Parámetro,Media ExitRates,0.04307279776650446,0.04223840171909338,0.043958769085985255,Bootstrap percentil y BCa,Validado por remuestreo,Conservar; considerar asimetría y outliers.
-Hipótesis,PageValues según Revenue,25.28852042732584,,,Permutación p=9.999e-05,Robusta,Mantener como asociación relevante; no interpretar causalmente.
-Correlación,BounceRates ~ ExitRates,0.9130043961815212,0.9066142735050987,0.9190577687235176,IC bootstrap 95%,Estable,Evaluar redundancia entre variables correlacionadas en S3.
-Correlación,ProductRelated ~ ProductRelated_Duration,0.86092683617637,0.8275882282396863,0.8866276191872814,IC bootstrap 95%,Estable,Evaluar redundancia entre variables correlacionadas en S3.
-Correlación,Informational ~ Informational_Duration,0.618954861781457,0.5885442180767145,0.6520600202785252,IC bootstrap 95%,Estable,Evaluar redundancia entre variables correlacionadas en S3.
-Correlación,Administrative ~ Administrative_Duration,0.6015833421250227,0.5754723898082532,0.6281735554377444,IC bootstrap 95%,Estable,Evaluar redundancia entre variables correlacionadas en S3.
+﻿metodo,resultado,estimacion,limite_inf,limite_sup,validacion,estado,recomendacion_S3
+Bootstrap,ProductRelated_Duration,1194.7462199688268,1162.4848763352934,1230.9518453071685,10.000 remuestras + IC percentil y BCa,Estimación estable,Conservar con cautela ante asimetría y extremos.
+Bootstrap,PageValues,5.889257862693593,5.580391401632237,6.234119167866709,10.000 remuestras + IC percentil y BCa,Estimación estable,Conservar con cautela ante asimetría y extremos.
+Bootstrap,ExitRates,0.04307279776650446,0.04223840171909338,0.043958769085985255,10.000 remuestras + IC percentil y BCa,Estimación estable,Conservar con cautela ante asimetría y extremos.
+Permutación,PageValues × Revenue,25.28852042732584,,,10.000 permutaciones; p=9.999e-05,Asociación robusta,Mantener como asociación; revisar proximidad al target/leakage en S3.
+Permutación χ²,VisitorType × Revenue,135.2519228192047,,,10.000 permutaciones; p=9.999e-05,Asociación robusta de magnitud pequeña,"Distinguir significancia estadística de V de Cramér ≈ 0,105."
+Correlación bootstrap,BounceRates ~ ExitRates,0.9130043961815185,0.9066142735050987,0.9190577687235176,IC bootstrap percentil 95%,Correlación estable,Evaluar redundancia entre variables correlacionadas en S3.
+Correlación bootstrap,ProductRelated ~ ProductRelated_Duration,0.8609268361763707,0.8275882282396863,0.8866276191872814,IC bootstrap percentil 95%,Correlación estable,Evaluar redundancia entre variables correlacionadas en S3.
+Correlación bootstrap,Informational ~ Informational_Duration,0.6189548617814573,0.5885442180767145,0.6520600202785252,IC bootstrap percentil 95%,Correlación estable,Evaluar redundancia entre variables correlacionadas en S3.
+Correlación bootstrap,Administrative ~ Administrative_Duration,0.6015833421250226,0.5754723898082532,0.6281735554377444,IC bootstrap percentil 95%,Correlación estable,Evaluar redundancia entre variables correlacionadas en S3.
 Monte Carlo,Tasa de conversión,0.15474773722627738,0.14833738848337388,0.16115166261151662,10.000 iteraciones + convergencia + sensibilidad,Escenario estable,"Usar como referencia de incertidumbre, no como pronóstico causal."
