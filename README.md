@@ -268,8 +268,7 @@ Durante el desarrollo se mantienen los siguientes criterios:
 | F1 | Completada | `F1/Formativa_1.ipynb` |
 | F2 | Completada | `F2/01_exploracion_inicial.ipynb` |
 | S1 | Completada | `S1/01_exploracion_inicial.ipynb` |
-| S2 | En desarrollo | `S2/02_simulacion_remuestreo.ipynb` |
-
+| S2 | Completada | `S2/02_simulacion_remuestreo.ipynb` |
 ---
 
 **Magíster en Ciencia de Datos e Inteligencia Artificial**  
