@@ -2,9 +2,9 @@
 
 ## Online Shoppers Purchasing Intention
 
-Proyecto desarrollado para la asignatura **Estadística Computacional para la Toma de Decisiones**, del **Magíster en Ciencia de Datos e Inteligencia Artificial**.
+Proyecto desarrollado para la asignatura **MCDI501 — Estadística Computacional para la Toma de Decisiones**, del **Magíster en Ciencia de Datos e Inteligencia Artificial** de la Universidad Andrés Bello (periodo 2026-82).
 
-El proyecto utiliza el conjunto de datos **Online Shoppers Purchasing Intention**, disponible en el UCI Machine Learning Repository, para estudiar el comportamiento de navegación de usuarios de comercio electrónico y su relación con la finalización de una compra.
+El proyecto utiliza el conjunto de datos **Online Shoppers Purchasing Intention**, del UCI Machine Learning Repository, para estudiar el comportamiento de navegación de usuarios de comercio electrónico y su relación con la finalización de una compra.
 
 ---
 
@@ -12,33 +12,18 @@ El proyecto utiliza el conjunto de datos **Online Shoppers Purchasing Intention*
 
 > **¿Qué características del comportamiento de navegación de los usuarios se relacionan con la probabilidad de que una sesión de comercio electrónico termine en una compra?**
 
-El análisis tiene un alcance principalmente descriptivo e inferencial. Las asociaciones identificadas no se interpretan como relaciones causales.
+El alcance es descriptivo, inferencial y predictivo. Las asociaciones identificadas no se interpretan como relaciones causales.
 
 ---
 
 ## 2. Conjunto de datos
 
-El conjunto de datos **Online Shoppers Purchasing Intention** contiene información de **12.330 sesiones** de navegación en un sitio de comercio electrónico.
+**Online Shoppers Purchasing Intention** contiene **12.330 sesiones** y **18 variables**, sin valores faltantes. Cada sesión pertenece a un usuario distinto dentro de un periodo de un año.
 
-La variable objetivo es:
+- **Variable objetivo:** `Revenue`, que indica si la sesión terminó en compra. Está desbalanceada: **15,47 %** de las sesiones terminan en compra.
+- **Predictores:** páginas visitadas y su duración (administrativas, informativas y de producto), tasas de rebote y salida, valor de página, cercanía a fechas especiales, mes, tipo de visitante, fin de semana y características técnicas (sistema operativo, navegador, región y tipo de tráfico).
 
-- **Revenue**: indica si la sesión terminó o no en una compra.
-
-El conjunto incluye variables asociadas a:
-
-- cantidad de páginas visitadas;
-- duración de las visitas;
-- métricas de navegación;
-- tasas de rebote y salida;
-- valor de las páginas;
-- características temporales de la sesión;
-- tipo de visitante;
-- sistema operativo, navegador y región;
-- tráfico y comportamiento durante fines de semana.
-
-Fuente:
-
-**UCI Machine Learning Repository — Online Shoppers Purchasing Intention Dataset**
+**Fuente:** Sakar, C. O., & Kastro, Y. (2018). *Online Shoppers Purchasing Intention Dataset*. UCI Machine Learning Repository. https://doi.org/10.24432/C5F88Q
 
 ---
 
@@ -48,27 +33,28 @@ Fuente:
 Estadistica_Computacional/
 │
 ├── F1/
-│   └── Formativa_1.ipynb
+│   └── Formativa_1.ipynb                          # EDA e inferencia (formativa)
 │
 ├── F2/
-│   └── 01_exploracion_inicial.ipynb
+│   └── Formativa_2_modelamiento_predictivo.ipynb  # primer modelo logístico (formativa)
 │
 ├── S1/
-│   ├── 01_exploracion_inicial.ipynb
-│   ├── informe_sumativa1_grupo2.docx
-│   └── informe_sumativa1_grupo2.pdf
+│   └── 01_exploracion_inicial.ipynb               # análisis exploratorio e inferencial
 │
 ├── S2/
-│   ├── 02_simulacion_remuestreo.ipynb
+│   ├── 02_simulacion_remuestreo.ipynb             # validación, simulación y remuestreo
 │   └── resultados/
-│       └── resultados_validados.csv
+│       └── resultados_validados.csv               # insumo trazable para S3
+│
+├── S3/
+│   └── S3_modelamiento_final.ipynb                # notebook maestro: modelamiento integrado
 │
 ├── data/
 │   ├── raw/
-│   │   └── online_shoppers_intention.csv
+│   │   └── online_shoppers_intention.csv          # datos originales, sin modificar
 │   └── processed/
 │
-├── docs/
+├── docs/                                          # informes PDF y Word de cada evaluación
 │
 ├── .gitignore
 ├── README.md
@@ -79,176 +65,111 @@ Estadistica_Computacional/
 
 ## 4. Desarrollo del proyecto
 
-### F1 — Definición y comprensión
+### F1 — Formativa 1: EDA e inferencia
 
-Primera aproximación al problema de investigación y al conjunto de datos.
+Primera aproximación al problema: comprensión del contexto, clasificación de variables, definición de la variable objetivo, estadística descriptiva e inferencia inicial.
 
-Se aborda:
+### S1 — Sumativa 1: análisis exploratorio e inferencial
 
-- comprensión del problema;
-- identificación del contexto;
-- clasificación de variables;
-- definición de la variable objetivo;
-- formulación inicial de la pregunta de investigación.
+- Estadística descriptiva, distribuciones y relaciones bivariadas.
+- Tasa de conversión: **15,47 %** (IC 95 %: 14,84 %–16,11 %).
+- IC 95 % para las medias de `ProductRelated_Duration`, `PageValues` y `ExitRates`.
+- Pruebas de hipótesis: χ² para `VisitorType × Revenue` (V de Cramér = 0,105) y Mann-Whitney para `PageValues` según `Revenue` (efecto grande, r_rb = 0,727).
+- Correlaciones altas entre `BounceRates`–`ExitRates` y `ProductRelated`–`ProductRelated_Duration`.
 
-### F2 — Estadística descriptiva
+### S2 — Sumativa 2: simulación, remuestreo y robustez
 
-Exploración inicial del conjunto de datos mediante herramientas de estadística descriptiva.
+- Bootstrap no paramétrico con IC percentil y BCa (10.000 remuestras).
+- Pruebas de permutación para `PageValues` y `VisitorType` (10.000 permutaciones).
+- Bootstrap de correlaciones, simulación Monte Carlo, convergencia, datos sintéticos y análisis de sensibilidad.
+- Robustez frente a valores extremos: media recortada, cercas IQR y jackknife.
 
-Incluye:
+Los resultados validados se guardan en `S2/resultados/resultados_validados.csv` como insumo para S3.
 
-- revisión de estructura y calidad de los datos;
-- análisis de variables numéricas y categóricas;
-- medidas de tendencia central y dispersión;
-- distribuciones;
-- visualizaciones;
-- relaciones bivariadas;
-- correlaciones.
+### F2 — Formativa 2: modelamiento predictivo
 
-### S1 — Estadística descriptiva e inferencial
+Ensayo del flujo de modelamiento: 12 % de faltantes MCAR controlados, imputación por mediana, partición 70/30 estratificada y un modelo de regresión logística con cinco predictores justificados con S1/S2, evaluado con matriz de confusión, métricas y curva ROC.
 
-La **Sumativa 1** profundiza el análisis mediante procedimientos descriptivos e inferenciales.
+### S3 — Sumativa 3: modelamiento predictivo integrado
 
-Incluye:
+Notebook maestro: `S3/S3_modelamiento_final.ipynb`.
 
-- análisis exploratorio de datos;
-- estimación puntual;
-- intervalos de confianza;
-- análisis de correlaciones;
-- pruebas de hipótesis;
-- interpretación estadística contextualizada.
-
-Entre los análisis realizados se consideran variables como:
-
-- `ProductRelated_Duration`;
-- `PageValues`;
-- `ExitRates`;
-- `VisitorType`;
-- `Revenue`.
-
-Los resultados obtenidos en esta etapa constituyen la base empírica para las simulaciones y procedimientos de remuestreo desarrollados posteriormente.
-
-### S2 — Simulación y remuestreo
-
-La **Sumativa 2** utiliza herramientas de estadística computacional para evaluar la estabilidad y robustez de los resultados obtenidos en S1.
-
-Se implementan:
-
-- **Bootstrap no paramétrico**;
-- intervalos de confianza percentiles y **BCa**;
-- **pruebas de permutación**;
-- bootstrap de correlaciones;
-- simulación **Monte Carlo**;
-- evaluación de convergencia;
-- generación de datos sintéticos;
-- análisis de sensibilidad;
-- análisis de robustez;
-- **jackknife**.
-
-Las simulaciones utilizan al menos **10.000 iteraciones o remuestras**, según corresponda.
-
-Los principales resultados validados se almacenan en:
-
-```text
-S2/resultados/resultados_validados.csv
-```
-
-Este archivo permite conservar la trazabilidad de los resultados que servirán como insumo para las siguientes etapas del proyecto.
+- **Datos faltantes:** 12 % MCAR en `ProductRelated_Duration` y `ExitRates`; comparación de eliminación, mediana e **imputación por regresión lineal múltiple** (4 predictores por variable, elegidos desde S1/S2). La regresión reduce el RMSE a menos de la mitad y preserva las correlaciones de S1.
+- **Decisiones tomadas a partir de la retroalimentación de S2:**
+  - filtro VIF antes de modelar: se excluye `BounceRates`;
+  - `PageValues` fuera de los modelos hasta confirmar que está disponible al momento de predecir;
+  - ponderación de clases (peso 3,23 para compras).
+- **Tres regresiones logísticas:** variables validadas en S1/S2, stepwise por AIC y modelo reducido por BIC. Selección por validación cruzada en entrenamiento.
+- **Modelo final:** AUC en prueba = 0,708; recall = 73,6 %.
+- **Bootstrap** de coeficientes y odds ratios (2.000 réplicas): todos conservan su signo en ≥ 99,8 % de las réplicas.
+- **Impacto de la imputación:** el modelo final ajustado con las tres estrategias llega a las mismas conclusiones.
+- **Escenario de decisión:** en una campaña simulada de 1.000 sesiones, el modelo concentra 1,55 veces más compradores que una selección al azar.
 
 ---
 
 ## 5. Trazabilidad del análisis
 
-El proyecto mantiene una secuencia metodológica acumulativa:
-
 ```text
-F1
-Definición y comprensión
-        ↓
-F2
-Estadística descriptiva
-        ↓
-S1
-Estimación e inferencia
-        ↓
-S2
-Simulación, remuestreo y robustez
-        ↓
-S3
-Etapa posterior del proyecto
+S1  Explorar     descriptiva, IC, pruebas de hipótesis
+ ↓
+S2  Validar      bootstrap, permutación, Monte Carlo, jackknife
+ ↓
+S3  Modelar      imputación por regresión, regresión logística, bootstrap del modelo
+ ↓
+Informe final integrado + video de presentación
 ```
 
-S2 no reemplaza los resultados obtenidos en S1, sino que los utiliza como punto de partida para evaluar su estabilidad mediante herramientas computacionales.
+Cada fase usa los resultados de la anterior como fundamento de sus decisiones metodológicas.
 
 ---
 
 ## 6. Reproducibilidad
 
-Los análisis fueron desarrollados en **Python** mediante notebooks de Jupyter.
-
-Se utiliza una semilla global para favorecer la reproducibilidad de los procedimientos aleatorios:
+Los análisis se desarrollaron en **Python 3.10 o superior** con notebooks de Jupyter. Todos los procedimientos aleatorios usan la semilla:
 
 ```python
-SEED = 42
+RANDOM_STATE = 42
 ```
 
-Las principales bibliotecas utilizadas son:
-
-- pandas
-- NumPy
-- SciPy
-- Matplotlib
-- Seaborn
-- Jupyter
-
-Las dependencias del proyecto se encuentran documentadas en:
-
-```text
-requirements.txt
-```
+Bibliotecas principales: pandas, NumPy, SciPy, statsmodels, scikit-learn, Matplotlib, Seaborn y Jupyter.
 
 Para instalar el entorno:
 
 ```bash
+python -m venv .venv
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
+jupyter notebook
 ```
 
 ---
 
 ## 7. Ejecución
 
-Los notebooks principales del proyecto se encuentran en:
+Ejecutar los notebooks en orden metodológico. Cada uno busca los datos en `data/raw/online_shoppers_intention.csv` y puede ejecutarse desde la raíz del repositorio o desde su propia carpeta.
 
-```text
-F1/
-F2/
-S1/
-S2/
-```
+| Orden | Notebook |
+|---|---|
+| 1 | `F1/Formativa_1.ipynb` |
+| 2 | `S1/01_exploracion_inicial.ipynb` |
+| 3 | `S2/02_simulacion_remuestreo.ipynb` (genera `S2/resultados/resultados_validados.csv`) |
+| 4 | `F2/Formativa_2_modelamiento_predictivo.ipynb` |
+| 5 | `S3/S3_modelamiento_final.ipynb` |
 
-Para reproducir los análisis se recomienda ejecutar los notebooks siguiendo el orden metodológico del proyecto.
-
-El conjunto de datos original se encuentra en:
-
-```text
-data/raw/online_shoppers_intention.csv
-```
+Antes de entregar, ejecutar cada notebook con **Kernel → Restart & Run All**.
 
 ---
 
 ## 8. Principales criterios metodológicos
 
-Durante el desarrollo se mantienen los siguientes criterios:
-
-- separación entre variables cuantitativas y cualitativas;
-- interpretación contextual de los resultados;
-- distinción entre asociación y causalidad;
-- análisis explícito de distribuciones asimétricas;
-- conservación de observaciones extremas cuando no existe evidencia suficiente para considerarlas errores;
-- evaluación de incertidumbre mediante intervalos de confianza;
-- validación computacional mediante remuestreo y simulación;
-- evaluación de estabilidad y sensibilidad de los resultados;
-- reproducibilidad mediante semillas aleatorias y documentación del código.
+- Separación entre variables cuantitativas y cualitativas según su significado.
+- Distinción entre asociación y causalidad.
+- Análisis explícito de distribuciones asimétricas y uso de medidas robustas.
+- Conservación de observaciones extremas cuando no hay evidencia de error (respaldado por el jackknife de S2).
+- Evaluación de la incertidumbre con intervalos de confianza clásicos y bootstrap.
+- Prevención de fuga de información: imputación y estandarización ajustadas solo con entrenamiento; exclusión de `PageValues` hasta confirmar su disponibilidad.
+- Evaluación con métricas adecuadas al desbalance (recall, F1, AUC), no solo accuracy.
+- Reproducibilidad mediante semillas y documentación del código.
 
 ---
 
@@ -259,17 +180,21 @@ Durante el desarrollo se mantienen los siguientes criterios:
 - **Daniela Rojas Vilches**
 - **Manuel Sánchez Cárcamo**
 
+**Docentes:** PhD. Jean Paul Maidana González · PhD. David Reute Zúñiga
+
 ---
 
 ## 10. Estado del proyecto
 
-| Etapa | Estado | Principal entregable |
-|---|---|---|
-| F1 | Completada | `F1/Formativa_1.ipynb` |
-| F2 | Completada | `F2/01_exploracion_inicial.ipynb` |
-| S1 | Completada | `S1/01_exploracion_inicial.ipynb` |
-| S2 | Completada | `S2/02_simulacion_remuestreo.ipynb` |
+| Etapa | Estado | Notebook | Informe |
+|---|---|---|---|
+| F1 | Completada | `F1/Formativa_1.ipynb` | `docs/informe_formativa1_grupo2.pdf` |
+| S1 | Completada | `S1/01_exploracion_inicial.ipynb` | `docs/informe_sumativa1_grupo2.pdf` |
+| S2 | Completada | `S2/02_simulacion_remuestreo.ipynb` | `docs/informe_sumativa2_grupo2.pdf` |
+| F2 | Completada | `F2/Formativa_2_modelamiento_predictivo.ipynb` | — (se entrega el notebook) |
+| S3 | Completada | `S3/S3_modelamiento_final.ipynb` | `docs/informe_sumativa3_grupo2.pdf` |
+
 ---
 
-**Magíster en Ciencia de Datos e Inteligencia Artificial**  
+**Magíster en Ciencia de Datos e Inteligencia Artificial**
 **Estadística Computacional para la Toma de Decisiones**
