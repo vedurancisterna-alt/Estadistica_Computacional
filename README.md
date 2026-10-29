@@ -105,6 +105,12 @@ Notebook maestro: `S3/S3_modelamiento_final.ipynb`.
 - **Impacto de la imputación:** el modelo final ajustado con las tres estrategias llega a las mismas conclusiones.
 - **Escenario de decisión:** en una campaña simulada de 1.000 sesiones, el modelo concentra 1,55 veces más compradores que una selección al azar.
 
+**Entregables de S3:**
+
+- Informe final integrado: [`docs/informe_sumativa3_grupo2.pdf`](docs/informe_sumativa3_grupo2.pdf)
+- Notebook maestro: [`S3/S3_modelamiento_final.ipynb`](S3/S3_modelamiento_final.ipynb)
+- Video de presentación (10 minutos, participan los cuatro integrantes): https://youtu.be/KRPnkCK2GlI
+
 ---
 
 ## 5. Trazabilidad del análisis
@@ -192,7 +198,7 @@ Antes de entregar, ejecutar cada notebook con **Kernel → Restart & Run All**.
 | S1 | Completada | `S1/01_exploracion_inicial.ipynb` | `docs/informe_sumativa1_grupo2.pdf` |
 | S2 | Completada | `S2/02_simulacion_remuestreo.ipynb` | `docs/informe_sumativa2_grupo2.pdf` |
 | F2 | Completada | `F2/Formativa_2_modelamiento_predictivo.ipynb` | — (se entrega el notebook) |
-| S3 | Completada | `S3/S3_modelamiento_final.ipynb` | `docs/informe_sumativa3_grupo2.pdf` |
+| S3 | Completada | `S3/S3_modelamiento_final.ipynb` | `docs/informe_sumativa3_grupo2.pdf` · [video](https://youtu.be/KRPnkCK2GlI) |
 
 ---
 
